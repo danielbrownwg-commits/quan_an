@@ -1,0 +1,673 @@
+    /* ==========================================================================
+       5. PLACE CARDS & GRID
+       ========================================================================== */
+    .places-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .places-list.cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .place-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      position: relative;
+      content-visibility: auto;
+      contain-intrinsic-size: 130px;
+      cursor: pointer;
+    }
+
+    .places-list.cols-2 .place-card {
+      flex-direction: column;
+      contain-intrinsic-size: 220px;
+    }
+
+    .card-thumb {
+      width: 112px;
+      min-height: 120px;
+      background-color: var(--surface-2);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .places-list.cols-2 .card-thumb {
+      width: 100%;
+      height: 120px;
+    }
+
+    .card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-fav-badge {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background: rgba(13, 24, 33, 0.65);
+      color: #FF7B72;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+    }
+
+    .card-body {
+      flex: 1;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .card-top-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-more-btn {
+      width: 34px;
+      height: 34px;
+      min-width: 34px;
+      min-height: 34px;
+      margin: -4px -6px 0 0;
+      color: var(--text-muted);
+      border-radius: 50%;
+    }
+
+    .card-meta-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 0.85rem;
+    }
+
+    .status-badge {
+      padding: 1px 7px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .status-badge.visited {
+      background-color: var(--accent-soft);
+      color: var(--accent);
+    }
+    .status-badge.want {
+      background-color: var(--surface-2);
+      color: var(--text-muted);
+    }
+
+    .rating-inline {
+      color: var(--star);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .price-inline {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .card-custom-row {
+      font-size: 0.83rem;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-custom-row span.lbl {
+      color: var(--text-muted);
+    }
+
+    .card-address {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-tags {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin-top: 2px;
+    }
+
+    .tag-chip {
+      font-size: 0.75rem;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background-color: var(--surface-2);
+      color: var(--text-muted);
+    }
+
+    mark.hl {
+      background-color: var(--accent-soft);
+      color: var(--accent);
+      padding: 0 2px;
+      border-radius: 3px;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--text-muted);
+    }
+    .empty-icon {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+    .btn-primary {
+      background-color: var(--accent);
+      color: var(--bg);
+      font-weight: 600;
+      padding: 0 18px;
+      border-radius: var(--radius-sm);
+    }
+    .btn-secondary {
+      background-color: var(--surface-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0 14px;
+      border-radius: var(--radius-sm);
+    }
+    .btn-danger {
+      background-color: var(--danger);
+      color: #fff;
+      font-weight: 600;
+      padding: 0 16px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* ==========================================================================
+       6. BOTTOM TAB BAR & FAB
+       ========================================================================== */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      background-color: var(--surface);
+      border-top: 1px solid var(--border);
+      padding-bottom: var(--safe-bottom);
+      display: flex;
+      justify-content: space-around;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .nav-item {
+      flex: 1;
+      height: 58px;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border-radius: 0;
+    }
+    .nav-item.active {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .nav-item svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      stroke-width: 1.75;
+      fill: none;
+    }
+
+    .fab-add {
+      position: fixed;
+      right: max(16px, calc((100vw - 600px) / 2 + 16px));
+      bottom: calc(74px + var(--safe-bottom));
+      z-index: 25;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background-color: var(--accent);
+      color: var(--bg);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+    }
+
+    /* ==========================================================================
+       7. FULL-SCREEN SHEETS & MODALS (Detail, Form, Filter, Field Manager)
+       ========================================================================== */
+    .overlay-sheet {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background-color: var(--bg);
+      display: none;
+      flex-direction: column;
+      max-width: 600px;
+      margin: 0 auto;
+      padding-top: var(--safe-top);
+      padding-bottom: var(--safe-bottom);
+      overflow-y: auto;
+    }
+    .overlay-sheet.open {
+      display: flex;
+    }
+
+    .sheet-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background-color: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .sheet-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sheet-body {
+      padding: 16px 14px 90px;
+      flex: 1;
+    }
+
+    .sheet-footer-fixed {
+      position: sticky;
+      bottom: 0;
+      z-index: 10;
+      background-color: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 10px 14px calc(10px + var(--safe-bottom));
+      display: flex;
+      gap: 10px;
+    }
+
+    /* Bottom Sheet Backdrop Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 70;
+      background-color: rgba(10, 18, 26, 0.55);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .modal-backdrop.open {
+      display: flex;
+    }
+    .bottom-modal {
+      width: 100%;
+      max-width: 600px;
+      max-height: 88vh;
+      background-color: var(--surface);
+      border-top-left-radius: 18px;
+      border-top-right-radius: 18px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding-bottom: var(--safe-bottom);
+      overflow: hidden;
+    }
+    .bottom-modal-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 600;
+    }
+    .bottom-modal-content {
+      padding: 14px 16px 20px;
+      overflow-y: auto;
+    }
+
+    /* ==========================================================================
+       8. DETAIL PAGE COMPONENTS
+       ========================================================================== */
+    .carousel-wrap {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      margin: -16px -14px 16px;
+      padding: 12px 14px;
+      background-color: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+    }
+    .carousel-item {
+      flex: 0 0 85%;
+      max-width: 340px;
+      height: 220px;
+      scroll-snap-align: center;
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .photo-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(13, 24, 33, 0.75);
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+    .photo-caption-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(13, 24, 33, 0.7);
+      color: #fff;
+      font-size: 0.8rem;
+      padding: 4px 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Notion-style Properties Table */
+    .props-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .props-row {
+      display: grid;
+      grid-template-columns: 38% 62%;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.92rem;
+    }
+    .props-row:last-child {
+      border-bottom: none;
+    }
+    .props-label {
+      padding: 10px 12px;
+      color: var(--text-muted);
+      background-color: var(--surface-2);
+      font-weight: 600;
+      word-break: break-word;
+    }
+    .props-val {
+      padding: 10px 12px;
+      word-break: break-word;
+    }
+    .props-val a {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    .detail-review-box {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      white-space: pre-wrap;
+      margin: 14px 0;
+    }
+
+    /* Interactive Half-Star Widget */
+    .star-picker {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      user-select: none;
+    }
+    .star-unit {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .star-unit svg {
+      width: 26px;
+      height: 26px;
+    }
+    .star-half-left, .star-half-right {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      z-index: 2;
+    }
+    .star-half-left { left: 0; }
+    .star-half-right { right: 0; }
+
+    /* ==========================================================================
+       9. FORMS & INPUTS
+       ========================================================================== */
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .form-control {
+      width: 100%;
+      min-height: 44px;
+      padding: 8px 12px;
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+    }
+    textarea.form-control {
+      min-height: 96px;
+      resize: vertical;
+    }
+    .chip-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .choice-chip {
+      padding: 6px 12px;
+      min-height: 38px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background-color: var(--surface);
+      font-size: 0.9rem;
+    }
+    .choice-chip.selected {
+      background-color: var(--accent);
+      border-color: var(--accent);
+      color: var(--bg);
+      font-weight: 600;
+    }
+
+    .photo-edit-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .photo-edit-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .photo-edit-card img {
+      width: 100%;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    /* ==========================================================================
+       10. STATS & RANDOM VIEWS
+       ========================================================================== */
+    .stat-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+    .stat-title {
+      font-weight: 600;
+      margin: 0 0 10px;
+      font-size: 1rem;
+    }
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+    .bar-label {
+      width: 110px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex-shrink: 0;
+    }
+    .bar-track {
+      flex: 1;
+      height: 12px;
+      background-color: var(--surface-2);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      background-color: var(--accent);
+      border-radius: 999px;
+    }
+    .bar-val {
+      width: 36px;
+      text-align: right;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: rgba(0, 0, 0, 0.92);
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: calc(10px + var(--safe-top)) 14px calc(16px + var(--safe-bottom));
+      color: #fff;
+    }
+    .lightbox.open {
+      display: flex;
+    }
+    .lightbox-img-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: auto;
+      touch-action: pinch-zoom;
+    }
+    .lightbox-img-wrap img {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+    }
+
+    /* Toast & Update Notification */
+    #toast-container {
+      position: fixed;
+      bottom: calc(74px + var(--safe-bottom));
+      left: 14px;
+      right: 14px;
+      max-width: 572px;
+      margin: 0 auto;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .toast {
+      background-color: var(--text);
+      color: var(--bg);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      pointer-events: auto;
+      font-size: 0.92rem;
+    }
+    .toast button {
+      color: var(--accent-soft);
+      font-weight: 600;
+      min-height: 34px;
+      padding: 0 10px;
+      background: rgba(255,255,255,0.12);
+    }
