@@ -323,10 +323,13 @@ document.getElementById('btn-form-cancel').onclick = closeSheet;
             onUpdate();
           };
         } else if (fd.type === 'select') {
+          const opts = fd.options || [];
           const single = Array.isArray(val) ? (val[0] ?? '') : val;
+          const isOrphan = Boolean(single && !opts.includes(single));
+          const chips = isOrphan ? [...opts, single] : opts;
           wrap.innerHTML = `<label class="form-label">${esc(fd.label)}</label>
             <div class="chip-group">
-              ${(fd.options || []).map(opt => `<button type="button" class="choice-chip ${single === opt ? 'selected' : ''}" data-opt="${esc(opt)}">${esc(opt)}</button>`).join('')}
+              ${chips.map(opt => `<button type="button" class="choice-chip ${single === opt ? 'selected' : ''}" data-opt="${esc(opt)}">${esc(opt)}${!opts.includes(opt) ? ' ✕' : ''}</button>`).join('')}
             </div>`;
           wrap.querySelectorAll('[data-opt]').forEach(btn => {
             btn.onclick = () => {
@@ -337,10 +340,13 @@ document.getElementById('btn-form-cancel').onclick = closeSheet;
             };
           });
         } else if (fd.type === 'multiselect') {
+          const opts = fd.options || [];
           const arr = toMultiValues(val);
+          const orphanSelected = arr.filter(v => !opts.includes(v));
+          const chips = [...opts, ...orphanSelected];
           wrap.innerHTML = `<label class="form-label">${esc(fd.label)}</label>
             <div class="chip-group">
-              ${(fd.options || []).map(opt => `<button type="button" class="choice-chip ${arr.includes(opt) ? 'selected' : ''}" data-opt="${esc(opt)}">${esc(opt)}</button>`).join('')}
+              ${chips.map(opt => `<button type="button" class="choice-chip ${arr.includes(opt) ? 'selected' : ''}" data-opt="${esc(opt)}">${esc(opt)}${!opts.includes(opt) ? ' ✕' : ''}</button>`).join('')}
             </div>`;
           wrap.querySelectorAll('[data-opt]').forEach(btn => {
             btn.onclick = () => {

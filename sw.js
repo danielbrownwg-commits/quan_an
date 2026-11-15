@@ -6,7 +6,7 @@
  * All paths are RELATIVE so it works under GitHub Pages at https://user.github.io/repo/
  * IMPORTANT: Every release MUST bump CACHE_VERSION to install a new SW and delete the old cache.
  */
-const CACHE_VERSION = 'v4';
+const CACHE_VERSION = 'v5';
 const CACHE = `places-${CACHE_VERSION}`;
 const CORE = [
   './',

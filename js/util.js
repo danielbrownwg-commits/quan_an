@@ -69,7 +69,7 @@
 
     /** Coerce a custom field value (single string or array) into an array for multiselect fields. */
     export function toMultiValues(val) {
-      if (Array.isArray(val)) return val;
+      if (Array.isArray(val)) return val.filter(v => v !== undefined && v !== null && v !== '');
       return (val !== undefined && val !== null && val !== '') ? [val] : [];
     }
 
