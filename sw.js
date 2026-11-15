@@ -1,9 +1,9 @@
 /* Places — service worker
- * Chiến lược: precache app shell, sau đó stale-while-revalidate (mở nhanh từ cache, cập nhật ngầm).
- * Mọi đường dẫn đều RELATIVE để chạy được dưới GitHub Pages dạng https://user.github.io/repo/
- * Khi thay đổi lớn: tăng CACHE_VERSION để cài SW mới và xóa cache cũ.
+ * Strategy: precache the app shell, then stale-while-revalidate (open fast from cache, update in the background).
+ * All paths are RELATIVE so it works under GitHub Pages at https://user.github.io/repo/
+ * On major changes: bump CACHE_VERSION to install a new SW and delete the old cache.
  */
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v2';
 const CACHE = `places-${CACHE_VERSION}`;
 const CORE = [
   './',
@@ -15,7 +15,7 @@ const CORE = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(CORE)));
-  // Không skipWaiting tự động: để app hỏi người dùng rồi mới kích hoạt bản mới (xem message bên dưới)
+  // No automatic skipWaiting: the app asks the user first, then activates the new version (see message handler below)
 });
 
 self.addEventListener('activate', (event) => {
@@ -30,7 +30,7 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// index.html gửi { type: 'SKIP_WAITING' } khi người dùng bấm "Cập nhật" trên toast
+// index.html sends { type: 'SKIP_WAITING' } when the user taps "Update" on the toast
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();
 });
@@ -39,7 +39,7 @@ self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
-  if (url.origin !== self.location.origin) return; // không đụng request ngoài origin
+  if (url.origin !== self.location.origin) return; // leave cross-origin requests alone
 
   event.respondWith(
     (async () => {
@@ -55,7 +55,7 @@ self.addEventListener('fetch', (event) => {
         .catch(() => null);
 
       if (cached) {
-        event.waitUntil(network); // cập nhật ngầm cho lần mở sau
+        event.waitUntil(network); // background update for the next open
         return cached;
       }
       return (await network) || Response.error();

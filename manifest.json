@@ -1,9 +1,9 @@
 {
   "id": "./",
-  "name": "Places — Sổ địa điểm",
+  "name": "Places — Place Journal",
   "short_name": "Places",
-  "description": "Sổ cá nhân lưu các địa điểm đã đi và muốn đi.",
-  "lang": "vi",
+  "description": "A personal journal of places you have visited and want to visit.",
+  "lang": "en",
   "dir": "ltr",
   "start_url": "./",
   "scope": "./",
